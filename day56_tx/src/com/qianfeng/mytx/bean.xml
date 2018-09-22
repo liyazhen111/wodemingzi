@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+    <!-- 扫描相关注解 -->  
+	<context:component-scan base-package="com.qianfeng.mytx"></context:component-scan>        
+
+	<aop:config>
+		<!-- 配置切入点，配置 切入点表达式
+			execution(访问权限  包名.类名.方法名(参数))
+			第一个* 表示所有访问的权限
+			第二个*(..) 任意方法名，任意参数
+			本例中，Dao类中的所有方法，都是切入点
+			配置切入点        关于aop的配置要配置切入点还要配置切面我觉得后边还会用的
+		-->
+		<aop:pointcut expression="execution(* com.qianfeng.mytx.UserService.*(..))" id="pc"/>
+	
+		<!-- 配置切面类 -->
+		<aop:aspect ref="txAop">
+			<!-- 环绕通知 -->
+			<aop:around method="txAround" pointcut-ref="pc"/>
+		</aop:aspect>
+	</aop:config>
+
+
+</beans>
+
+
+
+
+

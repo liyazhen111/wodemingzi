@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- 数据库连接的配置 -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/hib1804?createDatabaseIfNotExist=true</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+
+        <!-- SQL 方言 -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- 控制台输出sql语句 -->
+        <property name="show_sql">true</property>
+        <!-- 格式化sql语句 -->
+        <property name="hibernate.format_sql">true</property>
+        
+        <!-- 如果使用getCurrentSession，需要如下配置 -->
+		<property name="current_session_context_class">thread</property>
+		
+        <!-- update 如果表不存在，创建，如果表存在，更新
+        	create 每次都会创建表
+         -->
+        <property name="hbm2ddl.auto">update</property>
+		
+		<!-- 引入映射文件 -->
+        <mapping class="com.qianfeng.mytx.User"/>
+        
+
+
+    </session-factory>
+
+</hibernate-configuration>
